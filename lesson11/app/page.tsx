@@ -1,28 +1,28 @@
 'use client'
-import Image from 'next/image'
+import myndImage from './mynd.png'
 import { useState, Fragment, useCallback } from 'react'
 
 const DATA = [
   {
     id: 0,
-    title: 'Pied Piper',
-    subTitle: 'November 2018 - present',
+    title: 'Horse Identifier',
+    subTitle: 'November 1100 - 2000',
     description:
-      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
+      'This role requires expertise in equine anatomy and breed characteristics, attention to detail, and the ability to maintain accurate records'
   },
   {
     id: 1,
-    title: 'Pied Piper 2',
-    subTitle: 'November 2018 - present',
+    title: 'Scaley McScaleFace Mascot Performer',
+    subTitle: 'November 2000 - 2010',
     description:
-      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
+      'This role involves developing the mascot’s character, performing at various events, and maintaining the costume.'
   },
   {
     id: 2,
-    title: 'Pied Piper 3',
-    subTitle: 'November 2018 - present',
+    title: 'Flavor Guru',
+    subTitle: 'November 2010 - present',
     description:
-      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
+      'This role involves tasting and developing new ice cream flavors, ensuring they meet quality standards, and sometimes even traveling to source ingredients. It’s a job that combines creativity, sensory analysis, and a love for ice cream'
   }
 ]
 
@@ -39,7 +39,7 @@ const Job = (props: JobProps) => {
       <p>{props.subTitle}</p>
       <p>{props.description}</p>
     </div>
-  )   
+  )
 }
 
 
@@ -47,7 +47,15 @@ const Job = (props: JobProps) => {
 type HeaderProps = {}
 
 const Header = (props: HeaderProps) => {
-  return <div></div>
+  return <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderBottom: '2px solid #246' }}>
+    <div style={{ flex: 1 }}>
+      <h1 style={{ fontSize: '36px' }}>Bara Ég</h1>
+      <p style={{ fontSize: '20px' }}>Ég geri hluti</p>
+    </div>
+    <div>
+      <img src='mynd.png' alt="Mynd" style={{ width: '300px', height: 'auto', borderRadius: '50%' }} />
+    </div>
+  </div>
 }
 
 type ContentProps = {
@@ -56,15 +64,42 @@ type ContentProps = {
 
 const Content = (props: ContentProps) => {
   return (
-    <div>
-      {props.data.map(item => (
-        <div key={item.id}>{item.title} <br /> {item.subTitle} <br /> {item.description}</div>
-      ))}
+    <div style={{ margin: '20px', padding: '10px' }}>
+      {props.data.map(item => {
+        let imageSrc;
+        switch (item.title) {
+          case 'Horse Identifier':
+            imageSrc = '/horse.jpg';
+            break;
+          case 'Scaley McScaleFace Mascot Performer':
+            imageSrc = '/mascot.jpg';
+            break;
+          case 'Flavor Guru':
+            imageSrc = '/guru.jpg';
+            break;
+          default:
+            imageSrc = '';
+        }
+
+        return (
+
+          <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px', padding: '10px', border: '1px solid #189e11', borderRadius: '4px' }}>
+            <div style={{ flex: 1 }}>
+              <h2>{item.title}</h2>
+              <h3>{item.subTitle}</h3>
+              <p>{item.description}</p>
+            </div>
+            <div>
+              <img src={imageSrc} alt={item.title} style={{ width: '250px', height: 'auto', borderRadius: '4px', marginLeft: '10px' }} />
+            </div>
+          </div>
+        );
+      })}
     </div>
   )
 }
 
-export default function Home () {
+export default function Home() {
   return (
     <div>
       <Header />
